@@ -22,8 +22,18 @@ class App extends Component {
     console.log(this.state.currentTodo.text);
   }
 
-  addTodo = () =>{
-
+  addTodo = (e) =>{
+    e.preventDefault();
+    let todo = this.state.currentTodo;
+    let todos = [...this.state.todos, todo]
+    this.setState({
+      todos,
+      currentTodo:{
+        text: '',
+        key: ''
+      }
+    })
+   console.log(todos);
   }
 
   render(){
@@ -33,8 +43,8 @@ class App extends Component {
             Todo List   
         </header>
         <div className="container">
-          <AddTodo addtodo = {this.handleInput}/>
-          <Todos/>
+          <AddTodo inputtodo = {this.handleInput} addtodo ={this.addTodo} todos = {this.state}/>
+          <Todos todos = {this.state.todos}/>
         </div>
       </div>
   
